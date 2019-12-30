@@ -41,20 +41,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-var io = require('socket.io')(server);
-
-io.on('connection', function (socket) {
-
-    socket.on('add chat', (chatData = {}) => {
-        socket.broadcast.emit('load chat', chatData);
-    });
-
-    socket.on('delete chat', id => {
-        socket.broadcast.emit('delete chat', id);
-    })
-
-})
-
 /**
  * Listen on provided port, on all network interfaces.
  */
