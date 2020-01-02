@@ -28,13 +28,13 @@ class PhonebookItem extends React.Component {
     render() {
         return (
             <tr>
-            <td>{this.props.id}</td>
-            <td>{this.state.edit ? <input type="text" value={this.state.nameEdit} onChange={this.changeName} placeholder="Name" /> : this.props.name}</td>
-            <td>{this.state.edit ? <input type="text" value={this.state.phoneEdit} onChange={this.changePhone} placeholder="Phone" /> : this.props.phone}</td>
-            <td>{this.state.edit ? <button class="btn btn-primary" onClick={this.editPhonebookSave}>Save</button> : (this.props.sent ? <div><a class="btn btn-success" onCLick={() => this.setState({edit: true})}>Update</a>&nbsp;
-                <a class="btn btn-danger" onClick={this.props.deletePhonebook}>Delete</a></div>
-                : <div><a class="btn btn-danger" onClick={this.props.resendPhonebook}>Resend</a></div>) }</td>
-        </tr>
+                <td>{this.props.id}</td>
+                <td>{this.state.edit ? <input type="text" value={this.state.nameEdit} onChange={this.changeName} placeholder="Name" /> : this.props.name}</td>
+                <td>{this.state.edit ? <input type="text" value={this.state.phoneEdit} onChange={this.changePhone} placeholder="Phone" /> : this.props.phone}</td>
+                <td>{this.state.edit ? <button className="btn btn-primary" onClick={this.editPhonebookSave}>Save</button> : (this.props.sent ? <div><a className="btn btn-success" onClick={() => this.setState({edit: true})}>Update</a>&nbsp;
+                    <a className="btn btn-danger" onClick={this.props.deletePhonebook}>Delete</a></div>
+                    : <div><a className="btn btn-danger" onClick={this.props.resendPhonebook}>Resend</a></div>) }</td>
+            </tr>
         )
     }
 }

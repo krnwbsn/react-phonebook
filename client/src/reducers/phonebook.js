@@ -1,7 +1,7 @@
-const phonebooks = (state = [], action) => {
+const phonebook = (state = [], action) => {
     switch(action.type) {
         case 'LOAD_PHONEBOOK_SUCCESS':
-            return action.phonebooks.map((item, index) => {
+            return action.phonebook.map((item, index) => {
                 return {name: item.name, index: index + 1, phone: item.phone, id: item._id, sent: true};
             })
         case 'POST_PHONEBOOK':
@@ -15,7 +15,7 @@ const phonebooks = (state = [], action) => {
                 }
             ]
         case 'POST_PHONEBOOK_SUCCESS':
-            return action.phonebooks.map((item, index) => {
+            return action.phonebook.map((item, index) => {
                 return {name: item.name, index: index + 1, phone: item.phone, id: item._id, sent: true};
             })
         case 'POST_PHONEBOOK_FAILURE':
@@ -34,7 +34,7 @@ const phonebooks = (state = [], action) => {
                 return item;
             })
         case 'EDIT_PHONEBOOK_SUCCESS':
-            return action.phonebooks.map((item, index) => {
+            return action.phonebook.map((item, index) => {
                 return {name: item.name, index: index + 1, phone: item.phone, id: item._id, sent: true};
             })
         case 'EDIT_PHONEBOOK_FAILURE':
@@ -46,12 +46,14 @@ const phonebooks = (state = [], action) => {
                 return item;
             })
         case 'DELETE_PHONEBOOK':
-            return state.filter(item => item.id !== action.id);
+            let a = state.filter(item => item.id !== action.id)
+            console.log(a)
+            return a;
         case 'DELETE_PHONEBOOK_FAILURE':
             state.splice(action.props.id-1, 0, {name: action.props.name, index: action.props.id-1, phone: action.props.phone, id: action.props.origin_id, sent: true});
             return [...state];
         case 'SEARCH_PHONEBOOK_SUCCESS':
-            return action.phonebooks.map(item => {
+            return action.phonebook.map(item => {
                 return {name: item.name, phone: item.phone, id: item._id, sent: true};
             })
         case 'DELETE_PHONEBOOK_SUCCESS':
@@ -61,4 +63,4 @@ const phonebooks = (state = [], action) => {
     }   
 }
 
-export default phonebooks;
+export default phonebook;

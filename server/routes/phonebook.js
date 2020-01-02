@@ -12,22 +12,22 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    const { id, name, phone } = req.body;
-    let response = { ...defaultResponse, data: { id: '', name: '', phone: '' } }
-    if (![id, name, phone].includes(undefined)){
+    const { id_fake, name, phone } = req.body;
+    let response = { ...defaultResponse, data: { id_fake: '', name: '', phone: '' } }
+    if (![id_fake, name, phone].includes(undefined)){
         const phonebook = new Phonebook({
-            id,
+            id_fake,
             name,
             phone
         })
         phonebook.save().then(result => {
-            console.log(result)
             response.status= "SUCCESS";
-            response.data.id = result.id;
+            response.data.id_fake = result.id_fake;
             response.data.name = result.name;
             response.data.phone = result.phone;
             res.status(201).json(response);
         }).catch(err => {
+            console.log(err)
             res.status(500).json(err);
         });
     } else {
@@ -36,21 +36,23 @@ router.post('/', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    const { id, name, phone } = req.body;  
+    const { name, phone } = req.body;
+    console.log(name, phone)  
     let response = { ...defaultResponse };
-    if (![id, name, phone].includes(undefined)){
+    if (![name, phone].includes(undefined)) {
+        console.log('iyeu jalan guys')
         const editPhonebook = {
             name: name || '',
             phone: phone || ''
         };
         Phonebook.findByIdAndUpdate(req.params.id, editPhonebook).exec().then(before => {
             response.status = "SUCCESS";
-            response.data.id = id;
             response.data.name = name;
             response.data.phone = phone;
             res.status(201).json(response);
         });
     } else {
+        console.log('iyeu jalan tapi error')
         res.status(500).json(response);
     }
 });

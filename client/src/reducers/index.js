@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import phonebooks from './phonebook';
+import phonebook from './phonebook';
 
 export default combineReducers({
-    phonebooks
+    phonebook
 })

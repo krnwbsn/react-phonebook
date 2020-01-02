@@ -35,26 +35,22 @@ class FormAdd extends React.Component {
     render() {
         return (
             <div>
-                <div class="form-group row">
-                    <div class="form-group col-md-5">
-                        <button class="btn btn-primary" id="add" onClick={this.changeVisibilityForm}>Add</button>
+                <div className="form-group row mt-3">
+                    <div className="form-group col-md-5">
+                        <button className="btn btn-primary" id="add" onClick={this.changeVisibilityForm}>Add</button>
                     </div>
                 </div>
                 <form onSubmit={this.handleSubmit} style={this.state.isFormHidden ? {display: 'none'} : {display: 'block'}}>
-                    <div class="form-group row">
-                        <div class="form-group col-md-5">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" onChange={this.changeName} value={this.state.name} id="name" placeholder="Name" />
+                    <div className="form-group row">
+                        <div className="form-group col-md-3">
+                            <input type="text" className="form-control" onChange={this.changeName} value={this.state.name} id="name" placeholder="Name" />
                         </div>
-                        <div class="form-group col-md-5">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" onChange={this.changePhone} value={this.state.phone} id="phone" placeholder="Phone" />
+                        <div className="form-group col-md-3">
+                            <input type="text" className="form-control" onChange={this.changePhone} value={this.state.phone} id="phone" placeholder="Phone" />
                         </div>
-                        <div class="form-group col-md-1">
-                            <button type="submit" class="btn btn-success">Save</button>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <button class="btn btn-warning" onClick={() => this.setState({isFormHidden: true})}>Cancel</button>
+                        <div className="form-group col-md-2">
+                            <button type="submit" className="btn btn-success mr-1">Save</button> 
+                            <button className="btn btn-warning ml-1" onClick={() => this.setState({ isFormHidden: true })}>Cancel</button>
                         </div>
                     </div>
                 </form>

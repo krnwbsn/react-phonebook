@@ -8,9 +8,9 @@ const request = axios.create({
 })
 
 // load phonebook
-export const loadPhonebookSuccess = (phonebooks) => ({
+export const loadPhonebookSuccess = (phonebook) => ({
     type: 'LOAD_PHONEBOOK_SUCCESS',
-    phonebooks
+    phonebook
 })
 
 export const loadPhonebookFailure = () => ({
@@ -19,7 +19,7 @@ export const loadPhonebookFailure = () => ({
 
 export const loadPhonebook = () => {
     return dispatch => {
-        return request.get('phonebooks')
+        return request.get('')
         .then(function(response) {
             dispatch(loadPhonebookSuccess(response.data));
         })
@@ -31,9 +31,9 @@ export const loadPhonebook = () => {
 }
 
 // post phonebook
-export const postPhonebookSuccess = (phonebooks) => ({
+export const postPhonebookSuccess = (phonebook) => ({
     type: 'POST_PHONEBOOK_SUCESS',
-    phonebooks
+    phonebook
 })
 
 export const postPhonebookFailure = (id_fake) => ({
@@ -52,9 +52,9 @@ export const postPhonebook = (name, phone) => {
     let id_fake = Date.now();
     return dispatch => {
         dispatch(postPhonebookRedux(id_fake, name, phone));
-        return request.post('phonebooks', {name, phone})
+        return request.post('', {id_fake, name, phone})
         .then(function(response){
-            return request.get('phonebooks')
+            return request.get('')
             .then(function(response){
                 dispatch(postPhonebookSuccess(response.data));
             })
@@ -84,7 +84,7 @@ export const deletePhonebookFailure = (props) => ({
 export const deletePhonebook = (props) => {
     return dispatch => {
         dispatch(deletePhonebookRedux(props.origin_id));
-        return request.delete(`phonebooks/${props.origin_id}`)
+        return request.delete(`${props.origin_id}`)
         .then(function(response){
             dispatch(deletePhonebookSuccess());
         })
@@ -103,9 +103,9 @@ const editPhonebookRedux = (id, name, phone) => ({
     phone
 })
 
-export const editPhonebookSuccess = (phonebooks) => ({
+export const editPhonebookSuccess = (phonebook) => ({
     type: 'EDIT_PHONEBOOK_SUCCESS',
-    phonebooks
+    phonebook
 })
 
 export const editPhonebookFailure = (id, oldName, oldPhone) => ({
@@ -118,9 +118,9 @@ export const editPhonebookFailure = (id, oldName, oldPhone) => ({
 export const editPhonebook = (id, name, phone, oldName, oldPhone) => {
     return dispatch => {
         dispatch(editPhonebookRedux(id, name, phone));
-        return request.put(`phonebooks/${id}`, {name, phone})
+        return request.put(`${id}`, {name, phone})
         .then(function(response)    {
-            return request.get('phonebooks')
+            return request.get('')
             .then(function(response) {
                 dispatch(editPhonebookSuccess(response.data));
             })
@@ -135,9 +135,9 @@ export const editPhonebook = (id, name, phone, oldName, oldPhone) => {
 // resend phonebook
 export const resendPhonebook = (id_fake, name, phone) => {
     return dispatch => {
-        return request.post('phonebooks', {name, phone})
+        return request.post('', {name, phone})
         .then(function(response) {
-            return request.get('phonebooks')
+            return request.get('')
             .then(function(response) {
                 dispatch(postPhonebookSuccess(response.data));
             })
@@ -156,15 +156,15 @@ const searchPhonebookRedux = (name, phone) => ({
     phone
 })
 
-export const searchPhonebookSuccess = (phonebooks) => ({
+export const searchPhonebookSuccess = (phonebook) => ({
     type: 'SEARCH_PHONEBOOK', 
-    phonebooks
+    phonebook
 })
 
 export const searchPhonebook = (name, phone) => {
     return dispatch => {
         dispatch(searchPhonebookRedux(name, phone));
-        return request.post('phonebooks/search', {name, phone})
+        return request.post('search', {name, phone})
         .then(function(response) {
             dispatch(searchPhonebookSuccess(response.data))
         })
