@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    const { id, name, phone } = req.body;
+    const { id, name, phone } = req.body;  
     let response = { ...defaultResponse };
     if (![id, name, phone].includes(undefined)){
         const editPhonebook = {
@@ -54,6 +54,27 @@ router.put('/:id', function (req, res, next) {
         res.status(500).json(response);
     }
 });
+
+router.post('/search', function (req, res, next) {
+    let response = { ...defaultResponse };
+    let filterSearch = {
+        name: { $regex: req.body.name, $options: 'i' },
+        phone: { $regex: req.body.phone, $options: 'i' }
+    }
+    if (!req.body.name) {
+        delete filterSearch['name'];
+    }
+    if (!req.body.phone) {
+        delete filterSearch['phone'];
+    }
+    Phonebook.find(filterSearch, function (err, response) {
+        if (err) {
+            res.status(500).json({ 'error': err });
+        } else {
+            res.status(200).json(response);
+        }
+    })
+})
 
 router.delete('/:id', function (req, res, next) {
     let response = { ...defaultResponse };
