@@ -1,5 +1,5 @@
 import React from 'react';
-import PhonebookItem from '../components/PhonebookItem';
+import PhonebookItem from '../containers/PhonebookItem';
 import {connect} from 'react-redux';
 import {loadPhonebook} from '../actions';
 

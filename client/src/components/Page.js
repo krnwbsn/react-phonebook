@@ -1,5 +1,5 @@
 import React from 'react';
-import FormAdd from './FormAdd';
+import FormAdd from '../containers/FormAdd';
 import PhonebookList from '../containers/PhonebookList';
 
 export default class Page extends React.Component {
